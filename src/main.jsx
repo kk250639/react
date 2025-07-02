@@ -1,11 +1,11 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import "bootstrap/dist/css/bootstrap.min.css";
-import App18 from "./App18.jsx";
+import App23 from "./App23.jsx";
 
 // alt+ctrl+O : 불필요한 임포트제거
 createRoot(document.getElementById("root")).render(
   <StrictMode>
-    <App18 />
+    <App23 />
   </StrictMode>,
 );

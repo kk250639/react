@@ -1,0 +1,41 @@
+import React from "react";
+
+function App22(props) {
+  function handleLinkClick(e) {
+    // event.preventDefault() : 브라우저 기본 동작을 막기
+
+    e.preventDefault();
+    console.log("링크 클릭됨");
+  }
+
+  function handleLinkSubmit(e) {
+    e.preventDefault();
+    console.log("서브밋 됨");
+  }
+
+  return (
+    <div>
+      {/* onSubmit 이벤트 발생 중 */}
+      {/* 연습 : obSubmit 이벤트 발생시 브라우저 기본 동작을 멈추고*/}
+      {/*콘솔에 메세지 출력*/}
+      <form
+        action="https://search.naver.com/search.naver"
+        onSubmit={handleLinkSubmit}
+      >
+        <input type="text" name="query" />
+        <button>검색</button>
+      </form>
+
+      <button onClick={() => console.log("버튼 클릭됨")}>버튼</button>
+      <a
+        href="https://www.google.com"
+        onClick={handleLinkClick}
+        onClick={() => console.log("링크 클릭됨")}
+      >
+        구글로 이동
+      </a>
+    </div>
+  );
+}
+
+export default App22;

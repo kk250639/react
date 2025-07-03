@@ -8,17 +8,18 @@ function MyComp1({ color, score, city, kids, skills, person }) {
   return null;
 }
 
-// props 의 타입은 뭐든지 가능
-// String은 ""
-// 나머지는 {}
-
 function MyComp2({ name, age, address, married }) {
-  console.log("name", name);
-  console.log("age", age);
-  console.log("address", address);
-  console.log("married", married);
+  console.log("name", name); // lee
+  console.log("age", age); // 44
+  console.log("address", address); // {city: "seoul", country: "korea"}
+  console.log("married", married); // false
+
   return null;
 }
+
+// props 의 타입은 뭐든지 가능
+// string은 ""
+// 나머지는 {}
 
 function App7() {
   return (
@@ -28,11 +29,12 @@ function App7() {
         score={123.123}
         city={"seoul"}
         kids={true}
-        skills={("java", "css", "react")}
+        skills={["java", "css", "react"]}
         person={{ name: "son", age: 33, team: "토트넘" }}
       />
+      {/* 연습 : props 작성해보기 */}
       <MyComp2
-        name="lee"
+        name={"lee"}
         age={44}
         address={{ city: "seoul", country: "korea" }}
         married={false}

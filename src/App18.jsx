@@ -1,18 +1,17 @@
 import {
   Button,
-  Carousel,
   Container,
-  Form,
   Modal,
   Nav,
   Navbar,
   Pagination,
   Spinner,
+  Form,
+  FloatingLabel,
+  Carousel,
 } from "react-bootstrap";
 import { GrCaretNext, GrCaretPrevious } from "react-icons/gr";
 import { useState } from "react";
-import FormControl from "react-bootstrap/FormControl";
-import FloatingLabel from "react-bootstrap/FloatingLabel";
 
 function App18() {
   const [show, setShow] = useState(false);
@@ -25,18 +24,18 @@ function App18() {
           <Carousel.Caption>
             <h3>꿀벌</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere,
-              laborum!
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Aliquam,
+              libero?
             </p>
           </Carousel.Caption>
         </Carousel.Item>
         <Carousel.Item>
           <img className="d-block w-100" src="/public/bear.jpg" alt="" />
           <Carousel.Caption>
-            <h3>곰</h3>
+            <h3>아기곰</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere,
-              laborum!
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Cum,
+              voluptatem?
             </p>
           </Carousel.Caption>
         </Carousel.Item>
@@ -45,12 +44,13 @@ function App18() {
           <Carousel.Caption>
             <h3>독수리</h3>
             <p>
-              Lorem ipsum dolor sit amet, consectetur adipisicing elit. Facere,
-              laborum!
+              Lorem ipsum dolor sit amet, consectetur adipisicing elit.
+              Eligendi, iure!
             </p>
           </Carousel.Caption>
         </Carousel.Item>
       </Carousel>
+      <hr />
       <FloatingLabel label="아이디를 입력해주세요." controlId="idFloatingInput">
         <Form.Control placeholder="아이디를 입력해주세요." />
       </FloatingLabel>
@@ -61,18 +61,19 @@ function App18() {
         <Form.Control type="password" placeholder="패스워드를 입력해주세요." />
       </FloatingLabel>
       <hr />
-      <Form.Group>
+      <Form.Group controlId="idInput">
         <Form.Label>아이디</Form.Label>
         <Form.Control />
       </Form.Group>
-      <Form.Group>
+      <Form.Group controlId="passwordInput">
         <Form.Label>패스워드</Form.Label>
         <Form.Control type="password" />
       </Form.Group>
-      <Form.Group>
+      <Form.Group controlId="contentTextarea">
         <Form.Label>본문</Form.Label>
         <Form.Control as="textarea" />
       </Form.Group>
+      <hr />
       <Button onClick={() => setShow(!show)}>모달 예제</Button>
       <Modal show={show} onHide={() => setShow(!show)}>
         <Modal.Header closeButton={true}>

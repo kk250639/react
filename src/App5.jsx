@@ -23,8 +23,8 @@ function App5() {
       <MyComp4 color="yellow" />
       <MyComp4 color="blue" />
       <MyComp4 color="red" />
-      {/* prap */}
     </>
   );
 }
+
 export default App5;

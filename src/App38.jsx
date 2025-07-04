@@ -1,77 +1,250 @@
-import React, {useEffect, useState} from "react";
-import * as PropTypes from "prop-types";
+import React, { useEffect, useState } from "react";
+import { FormCheck } from "react-bootstrap";
 
-function MyComp1({value}) {
-  return <div className="boder">value *2 : {value * 2}</div>;
+function Child11() {
+  const [count, setCount] = useState(0);
+  // useEffect : 컴포넌트 생애 주기(lifecycle)별 실행되는 코드 작성 가능한 훅(hook)
+
+  useEffect(() => {
+    // initial-render(mount)
+    console.log("첫 렌더링시 실행 (mount 시 실행)");
+
+    // unmount 때 실행되는 코드
+    // : useEffect의 첫번째 파라미터로 들어가는 함수의 리턴되는 함수로
+    return () => {
+      console.log("언마운트때 실행되는 코드들....");
+    };
+  }, []);
+
+  console.log("차일드 함수 실행됨");
+
+  return (
+    <div>
+      <h3>자식 컴포넌트</h3>
+      <button onClick={() => setCount(count + 1)}>증가 {count}</button>
+    </div>
+  );
 }
 
-MyComp1.propTypes = {value: PropTypes.number};
+function MyComp1() {
+  const [checked, setChecked] = useState(true);
+  return (
+    <div>
+      <FormCheck
+        type="switch"
+        checked={checked}
+        onChange={() => setChecked(!checked)}
+      />
+      {checked && <Child11 />}
+    </div>
+  );
+}
 
-let someValue = 1;
+function Child21() {
+  // 연습 :
+  // 이 컴포넌트가 마운트 될 때 로그로 "자식21 마운트됨" 출력
+  // 이 컴포넌트가 언마운트 될 때 로그로 "자식21 언마운트됨" 출력
+  useEffect(() => {
+    // mount 시
+    console.log("자식21 마운트 됨");
+    return () => {
+      //unmount 시
+      console.log("또다른 언마운트시 실행 코드");
+    };
+  }, []);
+
+  // useEffect 여러 개 사용 가능
+  useEffect(() => {
+    // mount 시
+    console.log("또다른 mount 때 실행되는 코드");
+    return () => {
+      // unmount 시
+      console.log("자식21 언마운트 됨");
+    };
+  }, []);
+
+  return (
+    <div>
+      <h3>자식 21</h3>
+    </div>
+  );
+}
 
 function MyComp2() {
-  someValue = someValue + 1;
-  return <div className="border bg-light">someValue : {someValue - 1}</div>;
+  const [show, setShow] = useState(true);
+  return (
+    <div>
+      <FormCheck type="switch" checked={show} onChange={() => setShow(!show)} />
+      {show && <Child21 />}
+    </div>
+  );
+}
+
+function Child31() {
+  const [count, setCount] = useState(0);
+  const [otherCount, setOtherCount] = useState(0);
+
+  // useEffect 의 두번째 파라미터 : dependencies
+  // 변경 감지할 값들의 목록
+  // 이 목록의 값이 변경되면 useEffect의 첫번째 파라미터(함수) 실행
+  useEffect(() => {
+    console.log("count 업데이트되면 실행되는 함수의 코드들....");
+  }, [count]);
+  useEffect(() => {
+    console.log("마운트될 때만 실행되는 코드");
+  }, []);
+  useEffect(() => {
+    console.log("otherCount 업데이트되면 실행되는 함수의 코드들...");
+  }, [otherCount]);
+  useEffect(() => {
+    console.log("count/otherCount 업데이트");
+  }, [count, otherCount]);
+
+  return (
+    <div>
+      <button onClick={() => setCount(count + 1)}>카운트 {count}</button>
+      <button onClick={() => setOtherCount(otherCount + 1)}>
+        또 다른 카운트 {otherCount}
+      </button>
+    </div>
+  );
 }
 
 function MyComp3() {
-  useEffect(() => {
-    // 마운트 될 떄 실행 코드
-    console.log("comp3 마운트됨");
-
-    return () => {
-      // 언마운트 될 떄 실행 코드
-      console.log("comp3 언마운트됨");
-    };
-  }, []);
+  const [show, setShow] = useState(true);
   return (
     <div>
-      <h3>mycomp 3</h3>
+      <FormCheck type="switch" checked={show} onChange={() => setShow(!show)} />
+      {show && <Child31 />}
     </div>
   );
 }
 
 function Child41() {
+  const [count, setCount] = useState(0);
+  // 연습
+  // 1. 마운트 될 때 ("마운트됨") 출력
+  // 2. 언마운트 될 때 ("언마운트됨") 출력
+  // 3. count가 업데이트 될 때 ("count 업데이트됨") 출력
   useEffect(() => {
-    console.log("child41 mounted")
+    console.log("마운트됨");
+
     return () => {
-      console.log("child4 unmounted")
-    }
+      console.log("언마운트됨");
+    };
   }, []);
+
+  useEffect(() => {
+    if (count !== 0) {
+      console.log("count 업데이트됨");
+    }
+  }, [count]);
+
   return (
     <div>
-      <h3>child41 component</h3>
+      <button onClick={() => setCount(count + 1)}>카운트 {count}</button>
     </div>
-  )
+  );
+}
+function MyComp4() {
+  const [show, setShow] = useState(true);
+  return (
+    <div>
+      <FormCheck type="switch" checked={show} onChange={() => setShow(!show)} />
+      {show && <Child41 />}
+    </div>
+  );
 }
 
-function MyComp4() {
-  const [show, setShow] = useState()
+function App37(props) {
   return (
     <div>
-      <FormCheck type="switch" checked={show} onClick={() => setShow(!show)}/>
-      {show && <Child41/>}
+      <MyComp4 />
+      <hr />
+      <MyComp3 />
+      <hr />
+      <MyComp2 />
+      <hr />
+      <MyComp1 />
     </div>
-  )
+  );
+}
 
-
-  function App38(props) {
-    // strict mode : 모든 컴포넌트를 마운트, 언마운트, 마운트
-    // pure component : 함수(컴포넌트) 밖의 데이터를 변경하지 말 것
-    return (
-      <div>
-        <MyComp4/>
-        <hr/>
-        <MyComp3/>
-        <hr/>
-        <MyComp2/>
-        <MyComp2/>
-        <MyComp2/>
-        <hr/>
-        <MyComp1 value={1}/>
-        <MyComp1 value={2}/>
-      </div>
-    );
-  }
-
-  export default App38;
+export default App37;
+// import React, {useEffect, useState} from "react";
+// import * as PropTypes from "prop-types";
+//
+// function MyComp1({value}) {
+//   return <div className="boder">value *2 : {value * 2}</div>;
+// }
+//
+// MyComp1.propTypes = {value: PropTypes.number};
+//
+// let someValue = 1;
+//
+// function MyComp2() {
+//   someValue = someValue + 1;
+//   return <div className="border bg-light">someValue : {someValue - 1}</div>;
+// }
+//
+// function MyComp3() {
+//   useEffect(() => {
+//     // 마운트 될 떄 실행 코드
+//     console.log("comp3 마운트됨");
+//
+//     return () => {
+//       // 언마운트 될 떄 실행 코드
+//       console.log("comp3 언마운트됨");
+//     };
+//   }, []);
+//   return (
+//     <div>
+//       <h3>mycomp 3</h3>
+//     </div>
+//   );
+// }
+//
+// function Child41() {
+//   useEffect(() => {
+//     console.log("child41 mounted")
+//     return () => {
+//       console.log("child4 unmounted")
+//     }
+//   }, []);
+//   return (
+//     <div>
+//       <h3>child41 component</h3>
+//     </div>
+//   )
+// }
+//
+// function MyComp4() {
+//   const [show, setShow] = useState()
+//   return (
+//     <div>
+//       <FormCheck type="switch" checked={show} onClick={() => setShow(!show)}/>
+//       {show && <Child41/>}
+//     </div>
+//   )
+//
+//
+//   function App38(props) {
+//     // strict mode : 모든 컴포넌트를 마운트, 언마운트, 마운트
+//     // pure component : 함수(컴포넌트) 밖의 데이터를 변경하지 말 것
+//     return (
+//       <div>
+//         <MyComp4/>
+//         <hr/>
+//         <MyComp3/>
+//         <hr/>
+//         <MyComp2/>
+//         <MyComp2/>
+//         <MyComp2/>
+//         <hr/>
+//         <MyComp1 value={1}/>
+//         <MyComp1 value={2}/>
+//       </div>
+//     );
+//   }
+//
+//   export default App38;

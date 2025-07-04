@@ -1,19 +1,9 @@
 import React from "react";
-import {
-  BrowserRouter,
-  Link,
-  Outlet,
-  Route,
-  Routes,
-  useNavigate,
-} from "react-router";
+import { BrowserRouter, Link, Route, Routes, useNavigate } from "react-router";
 import { Button } from "react-bootstrap";
 
 function MainLayout() {
-  // useNavigate() hook 을 사용 :
-  // Link, NavLink 사용 없이 코드로 경로를 이동하는 방법
   const navigate = useNavigate();
-
   function handleABCClick() {
     navigate("/abc");
   }
@@ -59,9 +49,6 @@ function MainLayout() {
           </Button>
         </div>
       </div>
-      <div>
-        <Outlet />
-      </div>
     </div>
   );
 }
@@ -104,64 +91,3 @@ function App50(props) {
 }
 
 export default App50;
-// import React from "react";
-// import { BrowserRouter, Route, Routes } from "react-router";
-//
-// function MainLayout() {
-//   return (
-//     <div>
-//       <div>
-//         <div>NAVBAR</div>
-//         <div>
-//           <Link to="/abc">abc</Link>
-//         </div>
-//         <div>
-//           <Link to="/xyz">xyz</Link>
-//         </div>
-//         <div>
-//           <Link to="/qwe">qwe</Link>
-//         </div>
-//       </div>
-//       <div></div>
-//     </div>
-//   );
-// }
-//
-// function App50(props) {
-//   return (
-//     <div>
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="/" element={<MainLayout />}>
-//             <Route
-//               path="abc"
-//               element={
-//                 <div>
-//                   <h3></h3>
-//                 </div>
-//               }
-//             />
-//             <Route
-//               path="xyz"
-//               element={
-//                 <div>
-//                   <h3></h3>
-//                 </div>
-//               }
-//             />
-//             <Route
-//               path="qwe"
-//               element={
-//                 <div>
-//                   <h3></h3>
-//                 </div>
-//               }
-//             />
-//           </Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
-//
-// export default App50;

@@ -1,22 +1,19 @@
 import React, { useEffect } from "react";
 import {
   BrowserRouter,
-  Link,
   NavLink,
   Outlet,
   Route,
   Routes,
+  Link,
 } from "react-router";
-import "assets/mystyle.css";
+import "./assets/mystyle.css";
 // 연습 : 아래 경로에 같은 sidebar가 존재하도록 코드 작성
-// 연습 : 경로 이동 시 모든 컴포넌트가 다시 마운트 되지 않도록 코드 수정
-// 연습 : 현재 경로와 Link의 to prop이 같으면 그려지는 a 요소에 active class 추가하기
-
 // /react/install
 // /react/game
 // /react/state
 
-function ReactComponent() {
+function ReactLayout() {
   useEffect(() => {
     //
     console.log("마운트 때 실행 코드");
@@ -29,14 +26,15 @@ function ReactComponent() {
   return (
     <div className="d-flex gap-3">
       <div className="w-25 bg-body-tertiary p-1">
+        <div>React</div>
         <div>
-          <NavLink to="/react/install">인스톨</NavLink>
+          <NavLink to="/react/install">Install</NavLink>
         </div>
         <div>
-          <NavLink to="/react/game">게임</NavLink>
+          <NavLink to="/react/game">Game</NavLink>
         </div>
         <div>
-          <NavLink to="/react/state">상태</NavLink>
+          <NavLink to="/react/state">State</NavLink>
         </div>
       </div>
       <div className="flex-grow-1 bg-primary-subtle">
@@ -51,12 +49,12 @@ function App49(props) {
     <div>
       <BrowserRouter>
         <Routes>
-          <Route path="react" element={<ReactComponent />}>
+          <Route path="react" element={<ReactLayout />}>
             <Route
               path="install"
               element={
                 <div>
-                  <h3>설치 방법</h3>
+                  <h3>Install</h3>
                 </div>
               }
             />
@@ -64,7 +62,7 @@ function App49(props) {
               path="game"
               element={
                 <div>
-                  <h3>게임 만들기</h3>
+                  <h3>Game</h3>
                 </div>
               }
             />
@@ -72,7 +70,7 @@ function App49(props) {
               path="state"
               element={
                 <div>
-                  <h3>상태란 무엇인가?</h3>
+                  <h3>State</h3>
                 </div>
               }
             />
@@ -84,71 +82,3 @@ function App49(props) {
 }
 
 export default App49;
-// import React from "react";
-// import { BrowserRouter, Outlet, Route, Routes } from "react-router";
-//
-// // 연습 : 아래 경로에 같은 sidebar가 존재하도록 코드 작성
-// // /react/install
-// // /react/game
-// // /react/state
-//
-// function ReactLayout() {
-//   return (
-//     <div className="d-flex gap-3 p-5">
-//       <div className="w-25 bg-body-tertiary">
-//         <div>React</div>
-//         <div>
-//           <a href="/react/install">Install</a>
-//         </div>
-//         <div>
-//           <a href="/react/game">Game</a>
-//         </div>
-//         <div>
-//           <a href="/react/state">State</a>
-//         </div>
-//       </div>
-//       <div className="flex-1 bg-primary-subtle">
-//         <Outlet></Outlet>
-//       </div>
-//     </div>
-//   );
-// }
-//
-// function App49(props) {
-//   return (
-//     <div>
-//       <BrowserRouter>
-//         <Routes>
-//           <Route path="react" element={<ReactLayout />}>
-//             <Route
-//               path="install"
-//               element={
-//                 <div>
-//                   <h3>Install</h3>
-//                 </div>
-//               }
-//             />
-//             <Route
-//               path="game"
-//               element={
-//                 <div>
-//                   <h3>Game</h3>
-//                 </div>
-//               }
-//             />
-//             <Route
-//               path="state"
-//               element={
-//                 <div>
-//                   <h3>State</h3>
-//                 </div>
-//               }
-//             />
-//           </Route>
-//         </Routes>
-//       </BrowserRouter>
-//     </div>
-//   );
-// }
-//
-// export default App49;
